@@ -52,28 +52,33 @@ def main():
         t[0] = t0
 
 
-        # for responsável por 
+        # "for" responsável por cada ponto dos gráficos
         for i in range (0,n):
             t[i+1] = t[i] + h
 
-            y1_raiz = y1[i] #chute inicial é sempre o valor anteriormente calculado
+            # Chute inicial é sempre o valor anteriormente calculado
+            y1_raiz = y1[i]
             y2_raiz = y2[i]
             r = 0
-            #print("Começo da iteração")
-            #print("r y_raiz erro")
-            while r<5: #faz 20 vezes o ponto fixo ou o erro fica menor que 1E-10
-                y1_raiz = y1[i] + h*f1(y1_raiz, t[i+1])
-                y2_raiz = y2[i] + h*f2(y2_raiz, t[i+1])
+
+           # Aplicação do Euler Implícito
+            while r<5:
+                y1_raiz = y1[i] + h*f1(y1_raiz, t[i+1])    
+                y2_raiz = y2[i] + h*f2(y2_raiz, t[i+1])   
                 r += 1
             
+            # Obtido valor estimado de y1
             y1[i+1] = y1_raiz
             y2[i+1] = y2_raiz
 
-        t_lista.append(t) #coloca os valores de tempo numa lista
-        y1_lista.append(y1) #coloca os valores de y numa lista
-        y2_lista.append(y2) #coloca os valores de y numa lista
+        t_lista.append(t)   # Coloca os valores de tempo numa lista.
+        y1_lista.append(y1) # Coloca os valores de Y1 numa lista.
+        y2_lista.append(y2) # Coloca os valores de Y2 numa lista.
         h_lista.append(h)
 
+        # Fim do "for" de gráficos
+
+    # Solução Exata (Manufaturada)
     for k in range(len(t)):
         sol_exata1_lista.append(solucao1(t[k])) #coloca os valores da solução exata numa lista
     
@@ -81,6 +86,7 @@ def main():
         sol_exata2_lista.append(solucao2(t[k])) #coloca os valores da solução exata numa lista
 
 
+    # "For" responsável pela criação da tabela de convergência
     for i in range(1,m+1):
             e_1=e_2=q_1=q_2=p=r=e_t=0 #parametros da tabela de convergência
             if i>1:
@@ -103,7 +109,7 @@ def main():
                 
             print("%5d & %9.3e & %9.3e & %9.3e \\\\" % (n_lista[i-1],h_lista[i-1],e_t,p))
 
-    #gráficos
+    # Criação de gráficos
     for w in range(len(n_lista)):
         t = t_lista[w]
         y = y1_lista[w]
@@ -123,7 +129,7 @@ def main():
     plt.legend()
     plt.show()
 
-    #gráficos
+    # Criação de gráficos
     for w in range(len(n_lista)):
         t = t_lista[w]
         y = y2_lista[w]
