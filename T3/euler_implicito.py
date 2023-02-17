@@ -28,28 +28,31 @@ def solucao2(t):
 
 def main():
     
-    h_lista = []
-    t_lista = []
+    h_lista = []               #Declarações de cada vetor, nos quais serão armazenados os resultados
+    t_lista = []               # de cada passo
     y1_lista = []
     y2_lista = []
     sol_exata1_lista = []
     sol_exata2_lista = []
-    m=5
+    m=5                        #Quantidade de gráficos que serão feitos
 
-    for j in range(1,m+1):
+    for j in range(1,m+1):     # "for" que é responsável pelo plot de cada gráfico
         n=16*2**(j-1)
         n_lista.append(n)
         h = (tf-t0)/float(n)
 
-        #executa o método
+        #Inicializa os vetores apenas o '0'
         y1 = np.zeros(n+1)
         y2 = np.zeros(n+1)
         t = np.zeros(n+1)
-
+        
+        #Atribui as condições iniciais
         y1[0] = y1_0
         y2[0] = y2_0
         t[0] = t0
 
+
+        # for responsável por 
         for i in range (0,n):
             t[i+1] = t[i] + h
 
