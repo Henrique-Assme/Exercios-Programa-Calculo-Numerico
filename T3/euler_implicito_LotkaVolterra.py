@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 #Parâmetros iniciais
 t0 = 0.0 #t0 instante inicial
-tf = 50.0 #T instante final
+tf = 20.0 #T instante final
 n_lista = [] #qntd de pontos
 
 y1_0 = 20 #y1(t0) = 1
@@ -27,10 +27,10 @@ def main():
     y1_lista = []
     y2_lista = []
     erro_lista = []
-    m=3
+    m=6
 
     for j in range(1,m+1):
-        n=512*2**(j-1)
+        n=512*8**(j-1)
         n_lista.append(n)
         h = (tf-t0)/float(n)
 
@@ -83,26 +83,21 @@ def main():
 
                     p = log(q)/log(r)
                 
-            print("%5d & %9.3e & %9.3e & %9.3e \\\\" % (i-1,h_lista[i-1], erro_lista[i-1], p))
+            print("%5d & %9.3e & %9.3e & %9.3e \\\\" % (n_lista[i-1],h_lista[i-1], erro_lista[i-1], p))
 
     #gráficos
     for w in range(len(n_lista)):
         t = t_lista[w]
         y1 = y1_lista[w]
         y2 = y2_lista[w]
-        if w==0:
+        if w==len(n_lista)-1:
             plt.plot(t, y1, label="n=%d"%n_lista[w]+", Presa", linestyle=":", color="black")
-            plt.plot(t, y2, label="n=%d"%n_lista[w]+", Predador", linestyle=":", color="black")
-        if w==1:
-            plt.plot(t, y1, label="n=%d"%n_lista[w]+", Presa", linestyle="--", color="black")
-            plt.plot(t, y2, label="n=%d"%n_lista[w]+", Predador", linestyle="--", color="black")
-        if w==2:
-            plt.plot(t, y1, label="n=%d"%n_lista[w]+", Presa", linestyle="-.", color="black")
             plt.plot(t, y2, label="n=%d"%n_lista[w]+", Predador", linestyle="-.", color="black")
 
-    plt.title('Aprox para função 1 por Euler Implícito')
-    plt.xlabel('t[i]')
-    plt.ylabel('y1[i]')
+    plt.suptitle('Aproximação numérica para o problema presa-predador')
+    plt.title('Gráfico de presa e predador para o último n calculado')
+    plt.xlabel('tempo')
+    plt.ylabel('População')
     plt.grid(True)
     plt.legend()
     plt.show()
@@ -111,20 +106,36 @@ def main():
     for w in range(len(n_lista)):
         t = t_lista[w]
         y1 = y1_lista[w]
+        if  w==0:
+            plt.plot(t, y1, label="n=%d"%n_lista[w], linestyle=":", color="black")
+        if  w==2:
+            plt.plot(t, y1, label="n=%d"%n_lista[w], linestyle="--", color="black")
+        if  w==5:
+            plt.plot(t, y1, label="n=%d"%n_lista[w], linestyle="-.", color="black")
+
+    plt.suptitle('Aproximação numérica para o problema presa-predador')
+    plt.title('Gráfico da presa para 3 valores de n')
+    plt.xlabel('tempo')
+    plt.ylabel('População')
+    plt.grid(True)
+    plt.legend()
+    plt.show()
+
+    #gráficos
+    for w in range(len(n_lista)):
+        t = t_lista[w]
         y2 = y2_lista[w]
         if w==0:
-            plt.plot(t, y1, label="n=%d"%n_lista[w]+", Presa", linestyle=":", color="black")
-            plt.plot(t, y2, label="n=%d"%n_lista[w]+", Predador", linestyle=":", color="black")
-        if w==1:
-            plt.plot(t, y1, label="n=%d"%n_lista[w]+", Presa", linestyle="--", color="black")
-            plt.plot(t, y2, label="n=%d"%n_lista[w]+", Predador", linestyle="--", color="black")
+            plt.plot(t, y2, label="n=%d"%n_lista[w], linestyle=":", color="black")
         if w==2:
-            plt.plot(t, y1, label="n=%d"%n_lista[w]+", Presa", linestyle="-.", color="black")
-            plt.plot(t, y2, label="n=%d"%n_lista[w]+", Predador", linestyle="-.", color="black")
+            plt.plot(t, y2, label="n=%d"%n_lista[w], linestyle="--", color="black")
+        if w==5:
+            plt.plot(t, y2, label="n=%d"%n_lista[w], linestyle="-.", color="black")
 
-    plt.title('Aprox para função 1 por Euler Implícito')
-    plt.xlabel('t[i]')
-    plt.ylabel('y1[i]')
+    plt.suptitle('Aproximação numérica para o problema presa-predador')
+    plt.title('Gráfico do predador para 3 valores de n')
+    plt.xlabel('tempo')
+    plt.ylabel('População')
     plt.grid(True)
     plt.legend()
     plt.show()
