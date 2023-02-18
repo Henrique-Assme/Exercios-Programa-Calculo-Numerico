@@ -76,9 +76,9 @@ def main():
             if i>1:
                 r = h_lista[i-2]/h_lista[i-1] #razão usada para dividir o delta t (tem que ser 2 nesse caso)
 
-                e_1 = -1*(y1_lista[i-1][-1]-y1_lista[i-2][-1])/(2**1-1) #erro global deve tender à 0
+                e_1 = -1*(y1_lista[i-1][-1]-y1_lista[i-2][-1])/(8**1-1) #erro global deve tender à 0
 
-                e_2 = -1*(y2_lista[i-1][-1]-y2_lista[i-2][-1])/(2**1-1) #erro global deve tender à 0
+                e_2 = -1*(y2_lista[i-1][-1]-y2_lista[i-2][-1])/(8**1-1) #erro global deve tender à 0
 
                 e_t = sqrt(e_1*e_1 + e_2*e_2)
                 
